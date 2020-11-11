@@ -16,6 +16,6 @@
 		"NODE_ENV": "production",
 		"PORT": "5000",
 		"ALLOWED_CLICKS": "20",
-		"BASE_URL": "url-shortner-kappa.vercel.app"
+		"BASE_URL": "https://url-shortner-kappa.vercel.app/api/v1"
 	}
 }
