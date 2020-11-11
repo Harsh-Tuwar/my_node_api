@@ -8,9 +8,9 @@ const admin = fbAdmin.firestore();
 
 export const GenerateShortURL = async (req: e.Request, res: e.Response) => {
 	const longURL = req.body.lurl;
-	const baseURL = (config.NODE_ENV == 'development') ? 'http://localhost:5000/api' : config.BASE_URL;
+	const baseURL = (config.NODE_ENV == 'development') ? 'http://localhost:5000/api/v1' : config.BASE_URL;
 
-	if (!validUrl.isUri(baseURL || 'https://url-shortner-kappa.vercel.app')) {
+	if (!validUrl.isUri(baseURL || 'https://url-shortner-kappa.vercel.app/api/v1')) {
 		return res.status(401).json("Internal Server Error. URL is invalid");
 	}
 
