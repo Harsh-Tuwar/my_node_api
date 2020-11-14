@@ -6,5 +6,7 @@ export const config = {
 	NODE_ENV: process.env.NODE_ENV,
 	PORT: process.env.PORT,
 	ALLOWED_CLICKS: process.env.ALLOWED_CLICKS,
-	BASE_URL: process.env.BASE_URL
+	BASE_URL: process.env.BASE_URL,
+	USERNAME: process.env.USERNAME,
+	PASS: process.env.PASS
 }
