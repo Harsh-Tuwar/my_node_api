@@ -7,14 +7,16 @@ import { fbAdmin } from '../firebase';
 const admin = fbAdmin.firestore();
 
 export const GenerateShortURL = async (req: e.Request, res: e.Response) => {
-	const longURL = req.body.lurl;
-	const baseURL = (config.NODE_ENV == 'development') ? 'http://localhost:5000/api/v1' : config.BASE_URL;
+	const longURL = req.body.lurl; // longURL
+	const slug = req.body.slug ?? ''; // custom slug
+	const createdAt = new Date().toISOString(); //created Timestamp
+	const baseURL = (config.NODE_ENV == 'development') ? 'http://localhost:5000' : config.BASE_URL;
 
-	if (!validUrl.isUri(baseURL || 'https://url-shortner-kappa.vercel.app/api/v1')) {
+	if (!validUrl.isUri(baseURL || 'https://cliqme.ml')) {
 		return res.status(401).json("Internal Server Error. URL is invalid");
 	}
 
-	const urlCode = shortid.generate();
+	const urlCode = (slug == '') ? shortid.generate() : slug;
 
 	if (validUrl.isUri(longURL)) {
 		try {
@@ -27,7 +29,8 @@ export const GenerateShortURL = async (req: e.Request, res: e.Response) => {
 					longURL: longURL,
 					shortURL: shortURL,
 					urlCode: urlCode,
-					clickCount: "0"
+					clickCount: "0",
+					createdAt: createdAt
 				};
 
 				await admin.collection('urls').add(data);
