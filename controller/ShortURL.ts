@@ -1,5 +1,6 @@
 import * as e from 'express';
 import shortid from 'shortid';
+import DevideDetector from 'device-detector-js';
 import * as validUrl from 'valid-url';
 import { config } from '../config';
 import { fbAdmin } from '../firebase';
@@ -11,6 +12,11 @@ export const GenerateShortURL = async (req: e.Request, res: e.Response) => {
 	const slug = req.body.slug ?? ''; // custom slug
 	const createdAt = new Date().toISOString(); //created Timestamp
 	const baseURL = (config.NODE_ENV == 'development') ? 'http://localhost:5000' : config.BASE_URL;
+	const query = await admin.collection('urls').where('urlCode', '==', slug).get();
+
+	if (!query.empty) {
+		return res.status(400).json({ err: 'Slug taken ' });
+	}
 
 	if (!validUrl.isUri(baseURL || 'https://cliqme.ml')) {
 		return res.status(401).json("Internal Server Error. URL is invalid");
@@ -67,17 +73,28 @@ export const GetShortURL = async (req: e.Request, res: e.Response) => {
 	if (query.empty) {
 		return res.status(400).json("The short url doesn't exists in our system.");
 	} else {
-		let clickCount = docsData.clickCount;
 		const limit = config.ALLOWED_CLICKS || 20;
+		const deviceDetector = new DevideDetector();
+		const userAgent: any = req.get('user-agent');
+		const device = deviceDetector.parse(userAgent);
 
-		if (clickCount >= limit) {
-			console.log(`The click coun for ShortCode '${shortURLCode}' has passed the limit of ${limit}.`);
-			return res.status(400).json(`The click count for shortcode '${shortURLCode}' has passed the limit of ${limit}.`);
+		const analytics = {
+			url: docsData.longURL,
+			slug: docsData.urlCode,
+			deviceClient: device.client,
+			device: device.device,
+			os: device.os,
+			isBot: device.bot,
+			clickedAt: new Date().toISOString()
 		}
+
+		let clickCount = docsData.clickCount;
 
 		clickCount++;
 		
 		await admin.collection('urls').doc(docsData.id).update({ clickCount: clickCount });
+
+		await admin.collection('analytics').add(analytics);
 		
 		return res.redirect(docsData.longURL);
 	}
