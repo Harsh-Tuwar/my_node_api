@@ -16,6 +16,6 @@ const params = {
 
 export const fbAdmin = admin.initializeApp({
 	credential: admin.credential.cert(params)
-});
+}, 'url-shortner');
 
 

@@ -3,7 +3,7 @@ import shortid from 'shortid';
 import DevideDetector from 'device-detector-js';
 import * as validUrl from 'valid-url';
 import { config } from '../config';
-import { fbAdmin } from '../firebase';
+import { fbAdmin } from '../firebase/URLShortner';
 
 const admin = fbAdmin.firestore();
 
