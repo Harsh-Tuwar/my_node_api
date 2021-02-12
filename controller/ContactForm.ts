@@ -1,4 +1,3 @@
-import e from 'express';
 import express from 'express';
 import nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
