@@ -15,5 +15,5 @@ export const InitRoutes = (app: any) => {
 	app.post('/tracker/signup', ExpenseTracker.CreateUser);
 	app.post('/tracker/signin', ExpenseTracker.SignIn);
 
-	app.post('/scrap/price', YahooScrapper.GetData_ByTicker);
+	app.post('/scrap/GetData_ByTicker', YahooScrapper.GetData_ByTicker);
 }
