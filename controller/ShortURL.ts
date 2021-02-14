@@ -73,7 +73,6 @@ export const GetShortURL = async (req: e.Request, res: e.Response) => {
 	if (query.empty) {
 		return res.status(400).json("The short url doesn't exists in our system.");
 	} else {
-		const limit = config.ALLOWED_CLICKS || 20;
 		const deviceDetector = new DevideDetector();
 		const userAgent: any = req.get('user-agent');
 		const device = deviceDetector.parse(userAgent);
