@@ -16,7 +16,7 @@ export const InitRoutes = (app: any) => {
 	app.post('/tracker/signup', ExpenseTracker.CreateUser);
 	app.post('/tracker/signin', ExpenseTracker.SignIn);
 
-	app.post('/api/SavePortfolio', MyDivi.SavePortfolio);
+	app.post('/my-divi/SavePortfolio', MyDivi.isAuthenticated, MyDivi.SavePortfolio);
 
 	app.post('/scrap/GetData_ByTicker', YahooScrapper.GetData_ByTicker);
 }
