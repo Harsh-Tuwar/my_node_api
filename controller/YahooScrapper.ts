@@ -11,7 +11,7 @@ export const GetData_ByTicker = async (req: e.Request, res: e.Response) => {
 
 	const preparedData: any = await prepareDataForTicker(d, t);
 
-	return res.status(200).json({ preparedData });
+	return res.status(200).json({ payload: preparedData });
 };
 
 export const GetName_ByTicker = async (req: e.Request, res: e.Response) => {
@@ -58,7 +58,7 @@ const prepareDataForTicker = async (data: any, ticker: string) => {
 		data.response.price = price.data;	
 		
 		if (data.response.hasOwnProperty('inceptionDate')) {
-			data.response.dividendYield = data.response.yield * 100;
+			data.response.dividendYield = Number(data.response.yield * 100).toFixed(2) + "%";
 
 			[
 				'netAssets', 'nav',
@@ -86,6 +86,17 @@ const prepareDataForTicker = async (data: any, ticker: string) => {
 			'volume', 'avgVolume', 'beta', 'fiftyTwoWeekRange'
 		].forEach((item: string) => delete data.response[item]);
 
-		return data;
+		const payload: any = {
+			error: data.error,
+			currency: data.currency,
+			isETF: data.response.hasOwnProperty('inceptionDate'),
+			exDivDate: data.response.exDividendDate ?? "",
+			name: data.response.name,
+			price: String(data.response.price),
+			dividendYield: data.response.dividendYield ?? "",
+			dividend: data.response.dividend ?? String(data.response.ytdDailyTotalReturn)
+		}
+
+		return payload;
 	}
 }
