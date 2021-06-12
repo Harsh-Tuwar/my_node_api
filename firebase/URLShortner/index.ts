@@ -1,17 +1,17 @@
 import * as admin from 'firebase-admin';
-import * as certs from './certs.json';
+import { config } from '../../config';
 
 const params = {
-	type: certs.type,
-	projectId: certs.project_id,
-	privateKeyId: certs.private_key_id,
-	privateKey: certs.private_key,
-	clientEmail: certs.client_email,
-	clientId: certs.client_id,
-	authUri: certs.auth_uri,
-	tokenUri: certs.token_uri,
-	authProviderX509CertUrl: certs.auth_provider_x509_cert_url,
-	clientC509CertUrl: certs.client_x509_cert_url
+	type: config.URL_SHORTNER_FB_TYPE,
+	projectId: config.URL_SHORTNER_FB_PROJECT_ID,
+	privateKeyId: config.URL_SHORTNER_FB_PROJECT_ID,
+	privateKey: config.URL_SHORTNER_FB_PRIVATE_KEY,
+	clientEmail: config.URL_SHORTNER_FB_CLIENT_EMAIL,
+	clientId: config.URL_SHORTNER_FB_CLIENT_ID,
+	authUri: config.URL_SHORTNER_FB_AUTH_URI,
+	tokenUri: config.URL_SHORTNER_FB_TOKEN_URI,
+	authProviderX509CertUrl: config.URL_SHORTNER_FB_AUTH_PROVIDER_X509_CERT_URL,
+	clientC509CertUrl: config.URL_SHORTNER_FB_CLIENT_X509_CERT_URL
 };
 
 export const fbAdmin = admin.initializeApp({

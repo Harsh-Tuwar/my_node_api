@@ -11,13 +11,5 @@
 			"src": "(.*)",
 			"dest": "/index.ts"
 		}
-	],
-	"env": {
-		"NODE_ENV": "production",
-		"PORT": "5000",
-		"ALLOWED_CLICKS": "20",
-		"BASE_URL": "https://cliqme.ml",
-		"USERNAME":"tuwarharsh08@gmail.com",
-		"PASS": "vmwecvywxzqhctgi"
-	}
+	]
 }
