@@ -1,102 +1,65 @@
 import * as e from "express";
-const yahooStockAPI = require('yahoo-stock-api');
-const yahoo = require("yahoo-financial-data");
+import yahooFinance from 'yahoo-finance2';
 
 export const GetData_ByTicker = async (req: e.Request, res: e.Response) => {
 	const { t } = req.body;
 
-	if (!t) return res.status(400).json({ err: 'Missing Ticker Symbol! ' });
+	if (!t) return res.status(500).json({ err: 'Missing Ticker Symbol! ' });
+	
+	let data = null;
 
-	const d = await yahooStockAPI.getSymbol(t);
+	try {
+		data = await yahooFinance.quote(t);
+	} catch (error) {
+		console.warn(`Skipping ${t} due to an error: ${error}`);
+		return res.status(500).json({ err: 'Error!', data: error });
+	}
 
-	const preparedData: any = await prepareDataForTicker(d, t);
-
-	return res.status(200).json({ payload: preparedData });
+	return res.status(200).json({ data });
 };
 
-export const GetName_ByTicker = async (req: e.Request, res: e.Response) => {
+
+export const GetRecomendationsByTicker = async (req: e.Request, res: e.Response) => {
+	let data = null;
 	const { t } = req.body;
 
-	if (!t) return res.status(400).json({ err: 'No Symbol Found!' });
+	if (!t) return res.status(500).json({ err: 'Missing Ticker Symbol! ' });
 
-	const name: any = await new Promise((resolve, reject) => {
-		yahoo.companyName(t, function (err: Error, data: any) {
-			if (err) {
-				reject({ err });
-			} else {
-				resolve({ data });
-			}
-		});
-	});
-
-	return res.status(200).json({ name: name.data });
-}
-
-const prepareDataForTicker = async (data: any, ticker: string) => {
-	if (data && data.response) {
-		const price: any = await new Promise((resolve, reject) => {
-			yahoo.price(ticker, function (err: Error, data: any) {
-				if (err) {
-					reject({ err });
-				} else {
-					resolve({ data });
-				}
-			});
-		});
-
-		const name: any = await new Promise((resolve, reject) => {
-			yahoo.companyName(ticker, function (err: Error, data: any) {
-				if (err) {
-					reject({ err });
-				} else {
-					resolve({ data });
-				}
-			});
-		});
-
-		data.response.name = name.data;
-		data.response.price = price.data;	
-		
-		if (data.response.hasOwnProperty('inceptionDate')) {
-			data.response.dividendYield = Number(data.response.yield * 100).toFixed(2) + "%";
-
-			[
-				'netAssets', 'nav',
-				'ytdDailyTotalReturn', 'expenseRatio',
-				'inceptionDate'
-			].forEach((item) => data.response[item]);
-		} else {
-			const divYeild = data.response.forwardDividendYield.split(" ");
-			
-			if (divYeild[0] === 'N/A' || divYeild[1] === '(N/A)') {
-				data.response.dividendYield = "N/A";
-				data.response.dividend = "N/A";
-			} else {
-				data.response.dividendYield = divYeild[1].match(/\((.*)\)/).pop();
-				data.response.dividend = divYeild[0];
-			}
-
-			['forwardDividendYield', 'eps'].forEach((item) => delete data.response[item]);
-		}
-		
-		[
-			'updated', 'previousClose', 'peRatio',
-			'open', 'bid', 'eps',
-			'ask', 'dayRange', 'oneYearTargetEst',
-			'volume', 'avgVolume', 'beta', 'fiftyTwoWeekRange'
-		].forEach((item: string) => delete data.response[item]);
-
-		const payload: any = {
-			error: data.error,
-			currency: data.currency,
-			isETF: data.response.hasOwnProperty('inceptionDate'),
-			exDivDate: data.response.exDividendDate ?? "",
-			name: data.response.name,
-			price: String(data.response.price),
-			dividendYield: data.response.dividendYield ?? "",
-			dividend: data.response.dividend ?? String(data.response.ytdDailyTotalReturn)
-		}
-
-		return payload;
+	try {
+		data = await yahooFinance.recommendationsBySymbol(t);
+	} catch (error) {
+		console.warn(`Skipping due to an error: ${error}`);
+		return res.status(500).json({ err: 'Error!', data: error });
 	}
+
+	return res.status(200).json({ data });
+};
+
+export const GetTrendingSymbols = async (req: e.Request, res: e.Response) => {
+	const country = req.body.country || 'CA';
+	const queryOptions = { count: req.body.count || 10, lang: req.body.lang || 'en-US' };
+	let data = null;
+
+	try {
+		data = await yahooFinance.trendingSymbols(country, queryOptions);
+	} catch (error) {
+		console.warn(`Unable to return trending symbols due to an error: ${error}`);
+		return res.status(500).json({ err: 'Error!', data: error });
+	}
+
+	return res.status(200).json({ data });
+};
+
+export const TickerAutoComplete = async (req: e.Request, res: e.Response) => {
+	const query = req.body.query || '';
+	let data = null;
+	
+	try {
+		data = await yahooFinance.autoc(query);
+	} catch (error) {
+		console.warn(`Autocomplete failed due to an error: ${error}`);
+		return res.status(500).json({ err: 'Error!', data: error });
+	}
+
+	return res.status(200).json(JSON.stringify(data));
 }
