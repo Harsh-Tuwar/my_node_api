@@ -1,7 +1,7 @@
 import * as e from 'express';
+import path from 'path';
+
 
 export const Init = (req: e.Request, res: e.Response) => {
-	res.status(200).json({
-		data: 'Welcome to Harsh Tuwar\'s api. You can reach to him via https://harshtuwar.ml'
-	});
+	return res.sendFile(path.join(__dirname, 'public', 'index.html'));
 };

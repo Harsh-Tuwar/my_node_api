@@ -1,9 +1,11 @@
+import * as express from 'express';
 import * as Home from '../controller/Home';
 import * as ShortURL from '../controller/ShortURL';
 import * as ContactForm from '../controller/ContactForm';
 import * as YahooScrapper from '../controller/YahooScrapper';
+import * as  StartupIdea from '../controller/StartupIdea';
 
-export const InitRoutes = (app: any) => {
+export const InitRoutes = (app: express.Express) => {
 	app.get('/', Home.Init);
 
 	app.post('/shortener', ShortURL.GenerateShortURL);
@@ -15,4 +17,6 @@ export const InitRoutes = (app: any) => {
 	app.post('/Scrap/GetRecomendationsByTicker', YahooScrapper.GetRecomendationsByTicker);
 	app.post('/Scrap/GetTrendingSymbols', YahooScrapper.GetTrendingSymbols);
 	app.post('/Scrap/TickerAutoComplete', YahooScrapper.TickerAutoComplete);
+
+	app.get('/idea', StartupIdea.GetIdea);
 }
