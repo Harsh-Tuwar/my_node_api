@@ -18,5 +18,5 @@ export const InitRoutes = (app: express.Express) => {
 	app.post('/Scrap/GetTrendingSymbols', YahooScrapper.GetTrendingSymbols);
 	app.post('/Scrap/TickerAutoComplete', YahooScrapper.TickerAutoComplete);
 
-	app.get('/ideas/get', StartupIdea.GetIdea);
+	app.get('/idea/get', StartupIdea.GetIdea);
 }

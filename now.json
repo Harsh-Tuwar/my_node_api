@@ -4,16 +4,12 @@
 		{
 			"src": "/index.ts",
 			"use": "@vercel/node"
-		},
-		{
-			"src": "public/",
-			"use": "@now/static"
 		}
 	],
 	"routes": [
 		{
 			"src": "(.*)",
-			"dest": "/index.ts"
+			"dest": "/"
 		}
 	]
 }
