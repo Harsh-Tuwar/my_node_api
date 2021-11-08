@@ -4,7 +4,7 @@
 		{
 			"src": "/index.ts",
 			"use": "@vercel/node"
-		}
+		},
 		{
 			"src": "public/",
 			"use": "@now/static"
