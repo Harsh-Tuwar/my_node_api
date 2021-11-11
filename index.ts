@@ -18,7 +18,6 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
-
 if (config.NODE_ENV === 'development') {
 	app.use(morgan('dev'));
 }
@@ -27,6 +26,6 @@ if (config.NODE_ENV === 'development') {
 
 InitRoutes(app);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 app.listen(PORT, () => console.log(`We're live in ${process.env.NODE_ENV} mode on port ${PORT}`));

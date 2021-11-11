@@ -1,6 +1,6 @@
 import * as express from 'express';
 import * as Home from '../controller/Home';
-import * as ShortURL from '../controller/ShortURL';
+// import * as ShortURL from '../controller/ShortURL';
 import * as ContactForm from '../controller/ContactForm';
 import * as YahooScrapper from '../controller/YahooScrapper';
 import * as  StartupIdea from '../controller/StartupIdea';
@@ -8,8 +8,8 @@ import * as  StartupIdea from '../controller/StartupIdea';
 export const InitRoutes = (app: express.Express) => {
 	app.get('/', Home.Init);
 
-	app.post('/shortener', ShortURL.GenerateShortURL);
-	app.get('/:shortUrl', ShortURL.GetShortURL);
+	// app.post('/shortener', ShortURL.GenerateShortURL);
+	// app.get('/:shortUrl', ShortURL.GetShortURL);
 
 	app.post('/send', ContactForm.Send);
 
