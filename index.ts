@@ -18,11 +18,12 @@ app.use(bodyParser.json());
 
 app.use(cors());
 
+
 if (config.NODE_ENV === 'development') {
 	app.use(morgan('dev'));
 }
 
-app.use(express.static('public'));
+// app.use(express.static('public'));
 
 InitRoutes(app);
 

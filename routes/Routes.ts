@@ -13,10 +13,10 @@ export const InitRoutes = (app: express.Express) => {
 
 	app.post('/send', ContactForm.Send);
 
-	app.post('/Scrap/GetData_ByTicker', YahooScrapper.GetData_ByTicker);
-	app.post('/Scrap/GetRecomendationsByTicker', YahooScrapper.GetRecomendationsByTicker);
-	app.post('/Scrap/GetTrendingSymbols', YahooScrapper.GetTrendingSymbols);
-	app.post('/Scrap/TickerAutoComplete', YahooScrapper.TickerAutoComplete);
+	app.post('/scrap/GetData_ByTicker', YahooScrapper.GetData_ByTicker);
+	app.post('/scrap/GetRecomendationsByTicker', YahooScrapper.GetRecomendationsByTicker);
+	app.post('/scrap/GetTrendingSymbols', YahooScrapper.GetTrendingSymbols);
+	app.post('/scrap/TickerAutoComplete', YahooScrapper.TickerAutoComplete);
 
 	app.get('/idea/get', StartupIdea.GetIdea);
 }
