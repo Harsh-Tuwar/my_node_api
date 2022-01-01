@@ -11,8 +11,14 @@ export const GenerateShortURL = async (req: e.Request, res: e.Response) => {
 	const longURL = req.body.lurl; // longURL
 	const slug = req.body.slug ?? ''; // custom slug
 	const createdAt = new Date().toISOString(); //created Timestamp
-	const baseURL = (config.NODE_ENV == 'development') ? 'http://localhost:5000' : config.BASE_URL;
-	const query = await admin.collection('urls').where('urlCode', '==', slug).get();
+	const baseURL = (config.NODE_ENV == 'development') ? `http://localhost:${config.PORT}` : config.BASE_URL;
+	let query;
+	
+	try {
+		query =await admin.collection('urls').where('urlCode', '==', slug).get();
+	} catch (error) {
+		return res.status(500).json({ error });
+	}
 
 	if (!query.empty) {
 		return res.status(400).json({ err: 'Slug taken ' });

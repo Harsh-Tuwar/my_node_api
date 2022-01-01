@@ -22,8 +22,6 @@ if (config.NODE_ENV === 'development') {
 	app.use(morgan('dev'));
 }
 
-// app.use(express.static('public'));
-
 InitRoutes(app);
 
 const PORT = process.env.PORT || 5001;
