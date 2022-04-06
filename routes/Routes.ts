@@ -4,6 +4,7 @@ import * as ShortURL from '../controller/ShortURL';
 import * as ContactForm from '../controller/ContactForm';
 import * as YahooScrapper from '../controller/YahooScrapper';
 import * as  StartupIdea from '../controller/StartupIdea';
+import * as Quotes from '../controller/Quotes';
 import * as Joke from '../controller/Joke';
 
 export const InitRoutes = (app: express.Express) => {
@@ -22,4 +23,6 @@ export const InitRoutes = (app: express.Express) => {
 	app.get('/idea/get', StartupIdea.GetIdea);
 	
 	app.get('/joke/get', Joke.GetAJoke);
+
+	app.get('/quote', Quotes.GetQuote);
 }
