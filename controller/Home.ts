@@ -1,5 +1,5 @@
-import * as e from 'express';
+import express from 'express';
 
-export const Init = (_: e.Request, res: e.Response) => {
+export const Init = (_: express.Request, res: express.Response) => {
 	return res.redirect('https://harshtuwar.ml');
 };

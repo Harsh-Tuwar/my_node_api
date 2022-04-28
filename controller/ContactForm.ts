@@ -1,12 +1,26 @@
 import express from 'express';
+import HttpStatusCode from '../httpStatusCodes';
 import nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
 import { config } from '../config';
 
+const TRANSPORT_HOST = 'smtp.gmail.com';
+const TRANSPORT_PORT = 587;
+
+interface TransportAuth {
+	user: string | undefined;
+	pass: string | undefined;
+}
+interface Transport {
+	host: string;
+	port: number;
+	auth: TransportAuth;
+}
+
 export const Send = (req: express.Request, res: express.Response) => {
-	const transport = {
-		host: 'smtp.gmail.com',
-		port: 587,
+	const transport: Transport = {
+		host: TRANSPORT_HOST,
+		port: TRANSPORT_PORT,
 		auth: {
 			user: config.USERNAME,
 			pass: config.PASS
@@ -30,14 +44,14 @@ export const Send = (req: express.Request, res: express.Response) => {
 		text: content
 	}
 
-	transporter.sendMail(mail, (err: any, _: any) => {
+	transporter.sendMail(mail, (err: Error | null, _: any) => {
 		if (err) {
-			res.json({
+			res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
 				err: err,
 				status: 'fail'
 			});
 		} else {
-			res.json({
+			res.status(HttpStatusCode.OK).json({
 				status: 'success'
 			});
 		}
