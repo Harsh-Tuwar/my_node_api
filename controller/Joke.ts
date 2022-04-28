@@ -1,5 +1,6 @@
 import * as e from 'express';
 import axios, { AxiosResponse } from 'axios';
+import HttpStatusCode from 'httpStatusCodes';
 
 const baseURL = 'https://icanhazdadjoke.com/';
 
@@ -18,8 +19,8 @@ export const GetAJoke = async (_: e.Request, res: e.Response) => {
 		}) as AxiosResponse<Joke>;
 	} catch (error) {
 		console.log(error);
-		return res.status(500).json({ error });
+		return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({ error });
 	}
 
-	return res.status(200).send(response.data);
+	return res.status(HttpStatusCode.OK).send(response.data);
 };
