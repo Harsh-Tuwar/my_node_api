@@ -59,4 +59,20 @@ yarn dev
 
 Happy coding :)
 
+# API Endpoints
+```sh
+GET http://localhost:5001/
+GET http://localhost:5001/shortener/:shortURL
+GET http://localhost:5001/ideas
+GET http://localhost:5001/jokes
+GET http://localhost:5001/quotes
+
+POST http://localhost:5001/shortener
+POST http://localhost:5001/send
+POST http://localhost:5001/scrap/GetData_ByTicker
+POST http://localhost:5001/scrap/GetRecomendationsByTicker
+POST http://localhost:5001/scrap/GetTrendingSymbols
+POST http://localhost:5001/scrap/TickerAutoComplete
+```
+
 
