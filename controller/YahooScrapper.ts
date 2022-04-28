@@ -1,7 +1,7 @@
-import * as e from "express";
+import express from "express";
 import yahooFinance from 'yahoo-finance2';
 
-export const GetData_ByTicker = async (req: e.Request, res: e.Response) => {
+export const GetData_ByTicker = async (req: express.Request, res: express.Response) => {
 	const { t } = req.body;
 
 	if (!t) return res.status(500).json({ err: 'Missing Ticker Symbol! ' });
@@ -19,7 +19,7 @@ export const GetData_ByTicker = async (req: e.Request, res: e.Response) => {
 };
 
 
-export const GetRecomendationsByTicker = async (req: e.Request, res: e.Response) => {
+export const GetRecomendationsByTicker = async (req: express.Request, res: express.Response) => {
 	let data = null;
 	const { t } = req.body;
 
@@ -35,7 +35,7 @@ export const GetRecomendationsByTicker = async (req: e.Request, res: e.Response)
 	return res.status(200).json({ data });
 };
 
-export const GetTrendingSymbols = async (req: e.Request, res: e.Response) => {
+export const GetTrendingSymbols = async (req: express.Request, res: express.Response) => {
 	const country = req.body.country || 'CA';
 	const queryOptions = { count: req.body.count || 10, lang: req.body.lang || 'en-US' };
 	let data = null;
@@ -50,7 +50,7 @@ export const GetTrendingSymbols = async (req: e.Request, res: e.Response) => {
 	return res.status(200).json({ data });
 };
 
-export const TickerAutoComplete = async (req: e.Request, res: e.Response) => {
+export const TickerAutoComplete = async (req: express.Request, res: express.Response) => {
 	const query = req.body.query || '';
 	let data = null;
 	

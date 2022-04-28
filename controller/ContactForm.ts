@@ -1,5 +1,5 @@
 import express from 'express';
-import HttpStatusCode from 'httpStatusCodes';
+import HttpStatusCode from '../httpStatusCodes';
 import nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
 import { config } from '../config';

@@ -3,7 +3,7 @@ import * as Home from '../controller/Home';
 import * as ShortURL from '../controller/ShortURL';
 import * as ContactForm from '../controller/ContactForm';
 import * as YahooScrapper from '../controller/YahooScrapper';
-import * as  StartupIdea from '../controller/StartupIdea';
+import * as StartupIdea from '../controller/StartupIdea';
 import * as Quotes from '../controller/Quotes';
 import * as Joke from '../controller/Joke';
 
@@ -20,9 +20,9 @@ export const InitRoutes = (app: express.Express) => {
 	app.post('/scrap/GetTrendingSymbols', YahooScrapper.GetTrendingSymbols);
 	app.post('/scrap/TickerAutoComplete', YahooScrapper.TickerAutoComplete);
 
-	app.get('/idea/get', StartupIdea.GetIdea);
+	app.get('/ideas', StartupIdea.GetIdea);
 	
-	app.get('/joke/get', Joke.GetAJoke);
+	app.get('/jokes', Joke.GetAJoke);
 
-	app.get('/quote', Quotes.GetQuote);
+	app.get('/quotes', Quotes.GetQuote);
 }

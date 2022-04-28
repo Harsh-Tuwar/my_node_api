@@ -1,6 +1,6 @@
 import express from 'express';
 import axios, { AxiosResponse } from 'axios';
-import HttpStatusCode from 'httpStatusCodes';
+import HttpStatusCode from '../httpStatusCodes';
 
 const BASE_URL = 'https://icanhazdadjoke.com/';
 
