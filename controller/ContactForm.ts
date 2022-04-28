@@ -1,4 +1,5 @@
 import express from 'express';
+import HttpStatusCode from 'httpStatusCodes';
 import nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
 import { config } from '../config';
@@ -45,12 +46,12 @@ export const Send = (req: express.Request, res: express.Response) => {
 
 	transporter.sendMail(mail, (err: Error | null, _: any) => {
 		if (err) {
-			res.json({
+			res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
 				err: err,
 				status: 'fail'
 			});
 		} else {
-			res.json({
+			res.status(HttpStatusCode.OK).json({
 				status: 'success'
 			});
 		}
