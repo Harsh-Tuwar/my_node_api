@@ -13,5 +13,5 @@ export const GetIdea = async (_: express.Request, res: express.Response) => {
 
 	const idea = response.data.split('So, Basically, It\'s Like A ')[1];
 
-	return res.status(200).json({ idea });
+	return res.status(HttpStatusCode.OK).json({ idea });
 }
