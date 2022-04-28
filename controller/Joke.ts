@@ -1,8 +1,8 @@
-import * as e from 'express';
+import express from 'express';
 import axios, { AxiosResponse } from 'axios';
 import HttpStatusCode from 'httpStatusCodes';
 
-const baseURL = 'https://icanhazdadjoke.com/';
+const BASE_URL = 'https://icanhazdadjoke.com/';
 
 interface Joke {
 	id: string;
@@ -10,11 +10,11 @@ interface Joke {
 	status: number;
 }
 
-export const GetAJoke = async (_: e.Request, res: e.Response) => {
+export const GetAJoke = async (_: express.Request, res: express.Response) => {
 	let response;
 
 	try {
-		response = await axios.get(baseURL, {
+		response = await axios.get(BASE_URL, {
 			headers: { 'Accept': 'text/plain' }
 		}) as AxiosResponse<Joke>;
 	} catch (error) {
