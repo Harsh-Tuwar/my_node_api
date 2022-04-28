@@ -9,7 +9,7 @@ interface Joke {
 	status: number;
 }
 
-export const GetAJoke = async (req: e.Request, res: e.Response) => {
+export const GetAJoke = async (_: e.Request, res: e.Response) => {
 	let response;
 
 	try {

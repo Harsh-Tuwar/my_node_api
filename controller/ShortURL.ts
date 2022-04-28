@@ -15,7 +15,7 @@ export const GenerateShortURL = async (req: e.Request, res: e.Response) => {
 	let query;
 	
 	try {
-		query =await admin.collection('urls').where('urlCode', '==', slug).get();
+		query = await admin.collection('urls').where('urlCode', '==', slug).get();
 	} catch (error) {
 		return res.status(500).json({ error });
 	}
@@ -25,7 +25,7 @@ export const GenerateShortURL = async (req: e.Request, res: e.Response) => {
 	}
 
 	if (!validUrl.isUri(baseURL || 'https://cliqme.ml')) {
-		return res.status(401).json("Internal Server Error. URL is invalid");
+		return res.status(500).json("Internal Server Error. URL is invalid");
 	}
 
 	const urlCode = (slug == '') ? shortid.generate() : slug;
@@ -62,7 +62,7 @@ export const GenerateShortURL = async (req: e.Request, res: e.Response) => {
             return res.status(500).json("Internal Server error " + err.message);
 		}
 	} else {
-		res.status(400).json("Invalid URL. Please enter a vlaid url for shortening.");
+		return res.status(400).json("Invalid URL. Please enter a vlaid url for shortening.");
 	}
 }
 

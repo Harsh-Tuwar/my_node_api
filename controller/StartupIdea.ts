@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 
 const BASE_URL = 'https://itsthisforthat.com/api.php?text';
 
-export const GetIdea = async (req: express.Request, res: express.Response) => {
+export const GetIdea = async (_: express.Request, res: express.Response) => {
 	const response: AxiosResponse<string> = await axios.get(`${BASE_URL}`);
 	
 	if (response.data === undefined) {

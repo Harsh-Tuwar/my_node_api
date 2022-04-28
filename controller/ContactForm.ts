@@ -30,7 +30,7 @@ export const Send = (req: express.Request, res: express.Response) => {
 		text: content
 	}
 
-	transporter.sendMail(mail, (err: any, data: any) => {
+	transporter.sendMail(mail, (err: any, _: any) => {
 		if (err) {
 			res.json({
 				err: err,

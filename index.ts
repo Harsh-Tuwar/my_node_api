@@ -1,5 +1,4 @@
 import express from 'express';
-import colors from 'colors';
 import cors from 'cors';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
@@ -8,11 +7,9 @@ import { InitRoutes } from './routes/Routes';
 
 const app = express();
 
-app.use(
-	bodyParser.urlencoded({
-		extended: false
-	})
-);
+app.use(bodyParser.urlencoded({
+	extended: false
+}));
 
 app.use(bodyParser.json());
 
