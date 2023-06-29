@@ -40,6 +40,7 @@ export const Send = (req: express.Request, res: express.Response) => {
 	const mail: Mail.Options = {
 		from: name,
 		to: config.USERNAME,
+		cc: 'sahil.lapsiwala@gmail.com, fenilshah288@gmail.com, vaimorss2468@gmail.com, tuwarharsh08@gmail.com, mdhruvin946@gmail.com',
 		subject: subject,
 		text: content
 	}
