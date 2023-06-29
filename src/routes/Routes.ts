@@ -6,6 +6,7 @@ import * as YahooScrapper from '../controller/YahooScrapper';
 import * as StartupIdea from '../controller/StartupIdea';
 import * as Quotes from '../controller/Quotes';
 import * as Joke from '../controller/Joke';
+import * as SmartBhangar from '../controller/SmartBhangar';
 
 export const InitRoutes = (app: express.Express) => {
 	app.get('/', Home.Init);
@@ -14,6 +15,8 @@ export const InitRoutes = (app: express.Express) => {
 	app.get('/shortener/:shortUrl', ShortURL.GetShortURL);
 
 	app.post('/send', ContactForm.Send);
+
+	app.post('/inquiry', SmartBhangar.Inquiry);
 
 	app.post('/scrap/GetData_ByTicker', YahooScrapper.GetData_ByTicker);
 	app.post('/scrap/GetRecomendationsByTicker', YahooScrapper.GetRecomendationsByTicker);
