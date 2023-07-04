@@ -17,6 +17,7 @@ export const InitRoutes = (app: express.Express) => {
 	app.post('/send', ContactForm.Send);
 
 	app.post('/inquiry', SmartBhangar.Inquiry);
+	app.post('/submit-order', SmartBhangar.SubmitOrder);
 
 	app.post('/scrap/GetData_ByTicker', YahooScrapper.GetData_ByTicker);
 	app.post('/scrap/GetRecomendationsByTicker', YahooScrapper.GetRecomendationsByTicker);
