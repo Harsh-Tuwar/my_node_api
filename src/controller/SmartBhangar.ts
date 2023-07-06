@@ -3,6 +3,7 @@ import HttpStatusCode  from '../httpStatusCodes';
 import nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
 import { config } from '../config';
+import axios from 'axios';
 
 const TRANSPORT_HOST = 'smtp.gmail.com';
 const TRANSPORT_PORT = 587;
@@ -187,4 +188,16 @@ export const SubmitOrder = (req: express.Request, res: express.Response) => {
 			});
 		}
 	});
+}
+
+export const GetImages = async (_: any, res: express.Response) => {
+	try {
+		const images = await axios.get('https://hidden-treassure.s3.ca-central-1.amazonaws.com/image_names.json');
+	
+		return res.status(200).json(images.data);
+	} catch (err) {
+		return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
+			status: 'fail'
+		});
+	}
 }
