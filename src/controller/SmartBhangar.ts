@@ -171,7 +171,7 @@ export const SubmitOrder = (req: express.Request, res: express.Response) => {
 	const mail: Mail.Options = {
 		from: name,
 		to: config.USERNAME,
-		cc: 'sahil.lapsiwala@gmail.com, fenilshah288@gmail.com, vaimorss2468@gmail.com, tuwarharsh08@gmail.com, mdhruvin946@gmail.com',
+		cc: 'sahil.lapsiwala@gmail.com, fenilshah288@gmail.com, vaimorss2468@gmail.com, tuwarharsh08@gmail.com, mdhruvin946@gmail.com, pratikpanchani5@gmail.com',
 		subject: 'New Order Placed!',
 		html: content
 	}
