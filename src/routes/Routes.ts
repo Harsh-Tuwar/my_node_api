@@ -8,6 +8,8 @@ export const InitRoutes = (app: express.Express) => {
 	app.get('/', Home.Init);
 
 	app.post('/send', ContactForm.Send);
+	
+	app.post('/dpatel/send', ContactForm.SendToDavisPatel);
 
 	app.get('/idea', StartupIdea.GetIdea);
 	
