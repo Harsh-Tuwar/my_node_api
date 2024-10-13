@@ -82,7 +82,7 @@ export const SendToDavisPatel = (req: express.Request, res: express.Response) =>
 
 	const mail: Mail.Options = {
 		from: name,
-		to: config.DAVIS_SMTP_USERNAME,
+		to: 'info@ddsgroup.ca',
 		subject: subject,
 		text: content
 	}
