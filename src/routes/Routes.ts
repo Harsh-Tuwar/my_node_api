@@ -4,6 +4,7 @@ import * as Joke from '../controller/Joke';
 import * as Book from '../controller/Books';
 import * as StartupIdea from '../controller/StartupIdea';
 import * as ContactForm from '../controller/ContactForm';
+import * as CiviLens from '../controller/CiviLens';
 
 export const InitRoutes = (app: express.Express) => {
 	app.get('/', Home.Init);
@@ -17,4 +18,6 @@ export const InitRoutes = (app: express.Express) => {
 	app.get('/jokes', Joke.GetAJoke);
 
 	app.get('/book/:bookId', Book.GetBookById);
+
+	app.post('/civilens/waitlist', CiviLens.Send)
 }
