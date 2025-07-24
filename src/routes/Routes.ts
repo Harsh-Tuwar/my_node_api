@@ -6,6 +6,7 @@ import * as StartupIdea from '../controller/StartupIdea';
 import * as ContactForm from '../controller/ContactForm';
 import * as CiviLens from '../controller/CiviLens';
 import * as Startups from '../controller/Startups';
+import * as TuwarCorp from '../controller/TuwarCorp';
 
 export const InitRoutes = (app: express.Express) => {
 	app.get('/', Home.Init);
@@ -23,4 +24,6 @@ export const InitRoutes = (app: express.Express) => {
 	app.post('/civilens/waitlist', CiviLens.Send)
 
 	app.post('/:appName/waitlist', Startups.Send);
+
+	app.post('/inquiry', TuwarCorp.Inquiry);
 }
