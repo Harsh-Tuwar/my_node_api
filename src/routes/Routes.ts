@@ -7,6 +7,7 @@ import * as ContactForm from '../controller/ContactForm';
 import * as CiviLens from '../controller/CiviLens';
 import * as Startups from '../controller/Startups';
 import * as TuwarCorp from '../controller/TuwarCorp';
+import * as TitanBond from '../controller/TitanBond';
 
 export const InitRoutes = (app: express.Express) => {
 	app.get('/', Home.Init);
@@ -26,4 +27,6 @@ export const InitRoutes = (app: express.Express) => {
 	app.post('/:appName/waitlist', Startups.Send);
 
 	app.post('/inquiry', TuwarCorp.Inquiry);
+
+	app.post('/titanbond-epoxy/contact', TitanBond.Inquiry)
 }
