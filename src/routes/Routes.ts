@@ -24,9 +24,9 @@ export const InitRoutes = (app: express.Express) => {
 
 	app.post('/civilens/waitlist', CiviLens.Send)
 
-	app.post('/:appName/waitlist', Startups.Send);
-
 	app.post('/inquiry', TuwarCorp.Inquiry);
 
 	app.post('/titanbond-epoxy/contact', TitanBond.Inquiry)
+
+	app.post('/:appName/:event', Startups.Send);
 }
