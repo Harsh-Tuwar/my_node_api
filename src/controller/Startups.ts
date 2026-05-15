@@ -39,12 +39,16 @@ export const Send = (req: express.Request, res: express.Response) => {
 		return;
 	}
 
+	const isArcov = appName.toLowerCase().includes('arcov');
+	const authUser = isArcov ? config.TUWAR_CORP_USERNAME : config.USERNAME;
+	const authPass = isArcov ? config.TUWAR_CORP_PASSWORD : config.PASS;
+
 	const transport: Transport = {
 		host: TRANSPORT_HOST,
 		port: TRANSPORT_PORT,
 		auth: {
-			user: config.USERNAME,
-			pass: config.PASS
+			user: authUser,
+			pass: authPass
 		}
 	}
 
@@ -133,8 +137,8 @@ export const Send = (req: express.Request, res: express.Response) => {
 	`;
 
 	const mail: Mail.Options = {
-		from: config.USERNAME,
-		to: config.USERNAME,
+		from: authUser,
+		to: authUser,
 		replyTo: email ? `${name ?? ''} <${email}>`.trim() : undefined,
 		subject: subject,
 		html: content
